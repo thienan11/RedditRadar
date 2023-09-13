@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RedditRadar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-4">RedditRadar</h1>
+      <br/>
+      <h2>Enter a subreddit</h2>
+      <form method="POST" class="my-3">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" id="subreddit" name="subreddit" class="form-control" value="{{ subreddit }}">
+            <button type="submit" class="btn btn-primary">Get posts</button>
+          </div>
+        </div>
+      </form>
+      {% if data %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Link</th>
+            <th>Post</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in data %}
+          <tr>
+            <td>{{ post["title"] }}</td>
+            <td>{{ post["author"] }}</td>
+            <td><a href="{{ post['link'] }}" target="_blank">{{ post["link"]}}</a></td>
+            <td>{{ post["body"] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
