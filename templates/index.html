@@ -1,3 +1,6 @@
+<!-- Credit for favicon: protomanfan25 -->
+<!-- https://www.reddit.com/r/smashbros/comments/3oebhh/hello_everyone_alien_blue_icon_guy_again_i_made/ -->
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,51 +8,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RedditRadar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
   </head>
   <body class="text-bg-dark p-3">
     <div class="container">
-      <h1 class="mt-4"><a href="" class="text-decoration-none text-bg-dark">RedditRadar</a></h1>
-      <br/>
-      <h2>Enter a subreddit</h2>
+      <header class="text-center py-4">
+        <img src="/static/favicon.ico" alt="">
+        <h1 class="display-4"><a href="/" class="text-decoration-none text-light">RedditRadar</a></h1>
+      </header>
+      <main>
+        <section class="mb-5">
+          <h2 class="h4">Find the hottest posts of a subreddit!</h2>
 
-      {% if error_message %}
-      <div class="alert alert-danger mt-3">
-        {{ error_message }}
-      </div>
-      {% endif %}
-
-      <form method="POST" class="my-3">
-        <div class="form-group">
-          <div class="input-group">
-            <input type="text" id="subreddit" name="subreddit" class="form-control" value="{{ subreddit }}">
-            <button type="submit" class="btn btn-primary">Get posts</button>
+          {% if error_message %}
+          <div class="alert alert-danger mt-3">
+            {{ error_message }}
           </div>
-        </div>
-      </form>
+          {% endif %}
 
-      {% if data %}
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Link</th>
-            <th>Post</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for post in data %}
-          <tr>
-            <td>{{ post["title"] }}</td>
-            <td>{{ post["author"] }}</td>
-            <td><a href="{{ post['link'] }}" target="_blank">{{ post["link"]}}</a></td>
-            <td>{{ post["body"] }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
-      
+          <form method="POST" class="my-3">
+            <div class="input-group mb-3">
+              <input type="text" id="subreddit" name="subreddit" class="form-control shadow-none" placeholder="Enter subreddit" value="{{ subreddit }}" autocomplete="off">
+              <button type="submit" class="btn btn-primary">Get posts</button>
+            </div>
+          </form>
+        </section>
+
+        {% if data %}
+        <section>
+          <h2 class="h4">Top Posts</h2>
+          <!-- <div class="table-responsive"> -->
+            <table class="table table-auto table-dark">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Link</th>
+                  <th>Post</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for post in data %}
+                <tr>
+                  <td>{{ post["title"] }}</td>
+                  <td>{{ post["author"] }}</td>
+                  <td><a href="{{ post['link'] }}" target="_blank">{{ post["link"]}}</a></td>
+                  <td>{{ post["body"] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          <!-- </div> -->
+        </section>
+        {% endif %}
+
+      </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   </body>
