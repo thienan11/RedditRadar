@@ -23,7 +23,7 @@ reddit = praw.Reddit(
   user_agent = os.getenv("REDDIT_USER_AGENT"),
 )
 
-file = "reddit.json"
+file = "db.json"
 
 
 # Root for index page with flask
@@ -69,5 +69,5 @@ def index():
 
   return render_template("index.html", data=data, subreddit=subreddit_name, error_message=error_message)
 
-if __name__ == "__main__":
-  app.run(debug=True)
+# if __name__ == "__main__":
+#   app.run(debug=True)
