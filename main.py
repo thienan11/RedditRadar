@@ -23,7 +23,7 @@ reddit = praw.Reddit(
   user_agent = os.getenv("REDDIT_USER_AGENT"),
 )
 
-file = "db.json"
+file = "subreddit_posts.json"
 
 
 # Root for index page with flask
